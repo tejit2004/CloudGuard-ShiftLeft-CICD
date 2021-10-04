@@ -1,6 +1,7 @@
 # Check Point CloudGuard ShiftLeft integration with Github Actions CI/CD pipeline: 
 
 
+
  
 CloudGuard ShiftLeft CLI tool is a framework that will enable you to access all the various blades that CloudGuard offers quick and easy for integration within your pipeline.
 CloudGuard ShiftLeft will allow you to scan source code, Docker container images and serverless deployment packages, Terraform templates, and more. 
