@@ -1,7 +1,4 @@
-# use a node base container image
-FROM node
+# use an alpine base container image
+FROM alpine
 MAINTAINER Stuart Green (stuartg@checkpoint.com)
 COPY myshell.rar /home
-COPY web.rar /home 
-ADD webapp.js /webapp.js
-ENTRYPOINT ["node", "webapp.js"]
