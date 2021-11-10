@@ -1,6 +1,6 @@
 # Check Point CloudGuard - ShiftLeft
 ## Integration with Github Actions CI/CD pipeline: 
-
+#
 
  
 CloudGuard ShiftLeft CLI tool will enable you to access all of the blades that CloudGuard offers quick and easy for integration within your pipeline.
