@@ -37,7 +37,7 @@ jobs:
         continue-on-error: true
       - name: Check sarif file exists
         run: |
-          find / - name iacresults.sarif
+          find / -name iacresults.sarif
         
       # Upload sarif file
       - name: Upload Sarif results to Github
