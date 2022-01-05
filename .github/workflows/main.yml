@@ -32,7 +32,14 @@ jobs:
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft iac-assessment \
             -p /tmp/terraform/ -a GithubActionsScan \
-            -r 488041 -w -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -i terraform
+            -r 488041 -w -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -i terraform \
+            -o sarif > iacresults.sarif
+      # Upload sarif file
+      - name: Upload Sarif results to Github
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: iacresults.sarif
+            
   Image_Scanner:
     runs-on: ubuntu-latest
     steps:
