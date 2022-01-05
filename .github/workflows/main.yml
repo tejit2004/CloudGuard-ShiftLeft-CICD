@@ -30,7 +30,9 @@ jobs:
       - name: Run IAC assessment on Terraform folder
         run: |
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
-          "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft iac-assessment -p /tmp/terraform/ -r 488041 -w -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -i terraform
+          "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft iac-assessment \
+            -p /tmp/terraform/ -a GithubActionsScan \
+            -r 488041 -w -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -i terraform
   Image_Scanner:
     runs-on: ubuntu-latest
     steps:
