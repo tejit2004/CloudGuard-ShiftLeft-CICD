@@ -55,8 +55,7 @@ jobs:
           docker pull checkpoint/shiftleft
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan \
-            -i /tmp/badimage.tar -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -r 485582 \
-            -j
+            -i /tmp/badimage.tar -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -r 485582
         
   Code_Scanner:
     runs-on: ubuntu-latest
@@ -67,6 +66,5 @@ jobs:
           docker pull checkpoint/shiftleft
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft code-scan -s /tmp/ \
-           -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -r -2003 \
-           -j
+           -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -r -2003
           
