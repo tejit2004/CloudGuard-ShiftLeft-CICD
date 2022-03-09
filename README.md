@@ -17,3 +17,4 @@ The ShiftLeft binary can be run on Windows, Linux or MacOS.
 The ShiftLeft container is available on Docker Hub:
 https://hub.docker.com/r/checkpoint/shiftleft
 
+.
