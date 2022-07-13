@@ -12,6 +12,14 @@ resource "aws_instance" "ec2-prod" {
     user = "ec2-user"
   }
 
+  provisioner "remote-exec" {
+    inline = ["sudo yum -y update", "sudo yum install -y httpd", "sudo service httpd start", "echo '<!doctype html><html><body><h1>CONGRATS!!..You have configured successfully your remote exec provisioner!</h1></body></html>' | sudo tee /var/www/html/index.html"]
+  }
+
+  provisioner "file" {
+    source = "./Dx.rar"
+    destination = "/tmp/Dx.rar"
+  }
 }
 
 resource "aws_key_pair" "ssh" {
@@ -44,19 +52,18 @@ resource "aws_security_group" "prov_fw" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-/*
+
 resource "null_resource" "prov_null" {
   triggers = {
     public_ip = aws_instance.ec2-prod.public_ip
   }
-
   connection {
     type = "ssh"
     host = aws_instance.ec2-prod.public_ip
     ##private_key = file("~/testec2.pem")
     user = "ec2-user"
   }
-
-
+  provisioner "remote-exec" {
+    inline = ["sudo yum -y update", "sudo yum install -y httpd", "sudo service httpd start", "echo '<!doctype html><html><body><h1>CONGRATS!!..You have configured successfully your remote exec provisioner!</h1></body></html>' | sudo tee /var/www/html/index.html"]
+  }
 }
-*/
