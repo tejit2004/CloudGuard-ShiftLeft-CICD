@@ -63,6 +63,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run SourceGuard scan on code
         run: |
-          curl -L https://spectral-us.dome9.com/latest/sh\?dsn\={{ secrets.CHKP_SPECTRAL_DSN }} | sh
+          "curl -L https://spectral-us.dome9.com/latest/sh\?dsn\={{ secrets.CHKP_SPECTRAL_DSN }}" | sh:
           $HOME/.spectral/spectral scan --engine-kinds spectral packages --include-tags base,audit,iac
           
