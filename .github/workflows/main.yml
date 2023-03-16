@@ -41,8 +41,8 @@ jobs:
         env:
           SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
   
-      - name: Upload Sarif results to Github
       - uses: github/codeql-action/upload-sarif@v2
+      - name: Upload Sarif results to Github
         with:
           sarif_file: output.sarif
           
