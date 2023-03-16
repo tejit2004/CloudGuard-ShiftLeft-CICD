@@ -36,13 +36,14 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run SourceGuard scan on code
         run: |
-          curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-          $HOME/.spectral/spectral scan --engine-kinds iac secrets --include-tags base,audit,iac --sarif
+            curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
+            $HOME/.spectral/spectral scan --engine-kinds iac secrets --include-tags base,audit,iac --sarif
         env:
           SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
   
-      - uses: github/codeql-action/upload-sarif@v2
+
       - name: Upload Sarif results to Github
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: output.sarif
           
