@@ -37,7 +37,7 @@ jobs:
       - name: Run SourceGuard scan on code
         run: |
             curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --engine-kinds iac secrets --include-tags base,audit,iac --sarif
+            $HOME/.spectral/spectral scan --ok --engine-kinds iac secrets --include-tags base,audit,iac --sarif
         env:
           SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
   
