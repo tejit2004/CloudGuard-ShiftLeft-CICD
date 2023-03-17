@@ -66,5 +66,4 @@ jobs:
           sarif_file: output.sarif
           category: Spectral_secrets
 
-          $HOME/.spectral/
 
