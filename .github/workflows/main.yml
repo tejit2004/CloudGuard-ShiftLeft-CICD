@@ -30,14 +30,14 @@ jobs:
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan \
             -i /tmp/badimage.tar -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -r 485582
         
-  Spectral_scanner:
+  Spectral_IAC_scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run SourceGuard scan on code
+      - name: Run Spectral IaC scan 
         run: |
             curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --ok --engine-kinds iac secrets --include-tags base,audit,iac --sarif
+            $HOME/.spectral/spectral scan --ok --engine-kinds iac --include-tags base,audit,iac --sarif
         env:
           SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
   
@@ -46,4 +46,25 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: output.sarif
-          
+          category: Spectral_IAC
+
+  Spectral_SCA_scanner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Spectral secrets scan
+        run: |
+            curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
+            $HOME/.spectral/spectral scan --ok --engine-kinds secrets --include-tags base,audit --sarif
+        env:
+          SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
+  
+
+      - name: Upload Sarif results to Github
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: output.sarif
+          category: Spectral_secrets
+
+          $HOME/.spectral/
+
