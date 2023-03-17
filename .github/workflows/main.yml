@@ -39,7 +39,7 @@ jobs:
             curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
             $HOME/.spectral/spectral scan --ok --engine-kinds iac --include-tags base,audit,iac --sarif
         env:
-          SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
+          SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}"
   
 
       - name: Upload Sarif results to Github
@@ -48,7 +48,7 @@ jobs:
           sarif_file: output.sarif
           category: Spectral_IAC
 
-  Spectral_SCA_scanner:
+  Spectral_Secrets_scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -57,7 +57,7 @@ jobs:
             curl -L "https://get.spectralops.io/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
             $HOME/.spectral/spectral scan --ok --engine-kinds secrets --include-tags base,audit --sarif
         env:
-          SPECTRAL_DSN: "https://${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}@get.spectralops.io"
+          SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}"
   
 
       - name: Upload Sarif results to Github
