@@ -18,3 +18,4 @@ The ShiftLeft container is available on Docker Hub:
 https://hub.docker.com/r/checkpoint/shiftleft
 
 The Spectral binary is available through your CloudGuard portal.
+
