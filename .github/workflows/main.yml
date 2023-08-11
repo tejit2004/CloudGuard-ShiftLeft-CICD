@@ -37,7 +37,7 @@ jobs:
       - name: Run Spectral IaC scan 
         run: |
             curl -L "https://spectral-us.dome9.com/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --ok --engine-kinds iac --include-tags base,audit,iac --sarif
+            $HOME/.spectral/spectral scan --ok --engines iac --include-tags iac --sarif
         env:
           SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN }}"
   
@@ -55,7 +55,7 @@ jobs:
       - name: Run Spectral secrets scan
         run: |
             curl -L "https://spectral-us.dome9.com/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --ok --engine-kinds secrets --include-tags base,audit --sarif
+            $HOME/.spectral/spectral scan --ok --engines secrets --include-tags base,audit,audit3 --sarif
         env:
           SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN }}"
   
