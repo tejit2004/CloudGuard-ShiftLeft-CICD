@@ -30,14 +30,14 @@ jobs:
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan \
             -i /tmp/badimage.tar -e d0eada4e-2bb4-494e-9f52-14cc9cb2ed58 -r 485582
         
-  Spectral_IAC_scanner:
+  Spectral_scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run Spectral IaC scan 
+      - name: Run Spectral scan for IaC, SCA and secrets
         run: |
             curl -L "https://spectral-us.dome9.com/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --ok --engines iac --include-tags iac --sarif
+            $HOME/.spectral/spectral scan --ok --engines iac,oss,secrets --include-tags base,audit,iac --sarif
         env:
           SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN }}"
   
@@ -47,40 +47,3 @@ jobs:
         with:
           sarif_file: output.sarif
           category: Spectral_IAC
-
-  Spectral_Secrets_scanner:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run Spectral secrets scan
-        run: |
-            curl -L "https://spectral-us.dome9.com/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --ok --engines secrets --include-tags base,audit --sarif
-        env:
-          SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN }}"
-  
-
-      - name: Upload Sarif results to Github
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: output.sarif
-          category: Spectral_secrets
-
-  Spectral_SCA_scanner:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Run Spectral SCA scan
-        run: |
-            curl -L "https://spectral-us.dome9.com/latest/x/sh?key=${{ secrets.CHKP_SPECTRAL_DSN_TEAM }}" | sh
-            $HOME/.spectral/spectral scan --ok --engines oss --include-tags base,audit --sarif
-        env:
-          SPECTRAL_DSN: "${{ secrets.CHKP_SPECTRAL_DSN }}"
-  
-
-      - name: Upload Sarif results to Github
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: output.sarif
-          category: Spectral_oss
-
