@@ -19,3 +19,4 @@ https://hub.docker.com/r/checkpoint/shiftleft
 
 The Spectral binary is available through your CloudGuard portal.
 
+.
