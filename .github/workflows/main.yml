@@ -15,7 +15,7 @@ jobs:
   # This workflow contains a single job called "build"
   
             
-  Image_Scanner:
+  ShiftLeft_image_scanner:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
