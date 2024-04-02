@@ -28,4 +28,4 @@ jobs:
           docker pull checkpoint/shiftleft
           docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan \
-            -i /tmp/badimage.tar -e 85291ded-38b8-4cf6-87cc-d445d2ab25f3 -r 485582
+            -i /tmp/badimage.tar -e 85291ded-38b8-4cf6-87cc-d445d2ab25f3 -r -2002
