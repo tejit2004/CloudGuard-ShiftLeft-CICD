@@ -25,7 +25,7 @@ jobs:
           docker save badimage -o badimage.tar
       - name: Run Shiftleft assessment on built image
         run: |  
-          docker pull checkpoint/shiftleft
-          docker run -v=$(pwd):/tmp/ -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
+          docker pull checkpoint/shiftleft:latest_v2
+          docker run -v=$(pwd):/tmp/ -e "SHIFTLEFT_REGION=${{ secrets.SHIFTLEFT_REGION }}" -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft shiftleft image-scan \
-            -i /tmp/badimage.tar -e 85291ded-38b8-4cf6-87cc-d445d2ab25f3 -r -2002
+            -i /tmp/badimage.tar -e 92c01761-734e-46e3-9f47-af21c2be4307 -r -2007
