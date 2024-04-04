@@ -27,4 +27,4 @@ jobs:
           docker pull checkpoint/shiftleft:latest_v2
           docker run -v=$(pwd):/tmp/ -e "SHIFTLEFT_REGION=${{ secrets.SHIFTLEFT_REGION }}" -e "CHKP_CLOUDGUARD_ID=${{ secrets.CHKP_CLOUDGUARD_ID }}" -e \
           "CHKP_CLOUDGUARD_SECRET=${{ secrets.CHKP_CLOUDGUARD_SECRET }}" checkpoint/shiftleft:latest_v2 shiftleft image-scan \
-            -i /tmp/badimage.tar -e 92c01761-734e-46e3-9f47-af21c2be4307 -r -2008
+            -i /tmp/badimage.tar -e 92c01761-734e-46e3-9f47-af21c2be4307 -r -2007
