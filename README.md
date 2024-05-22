@@ -1,4 +1,4 @@
-# Check Point CloudGuard - ShiftLeft
+ # Check Point CloudGuard - ShiftLeft
 ## Integration with Github Actions CI/CD pipeline: 
 #
 #
